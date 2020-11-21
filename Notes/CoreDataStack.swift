@@ -10,7 +10,6 @@
 //  - Setting Up a Core Data Stack Manually: https://developer.apple.com/documentation/coredata/setting_up_a_core_data_stack/setting_up_a_core_data_stack_manually
 //  - Initializing the Core Data Stack: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/InitializingtheCoreDataStack.html#//apple_ref/doc/uid/TP40001075-CH4-SW1
 
-
 import CoreData
 
 final class CoreDataStack {
@@ -23,8 +22,7 @@ final class CoreDataStack {
     // MARK: - Initialization
     
     init(modelName: String, completion: @escaping (_ error: Swift.Error?) -> ()) throws {
-        guard let modelURL = Bundle.main.url(forResource: modelName,
-                                             withExtension: "momd") else {
+        guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
             throw Error.dataModelSearchFailure(forModelName: modelName)
         }
         guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
@@ -59,7 +57,7 @@ final class CoreDataStack {
     }
 }
 
-// MARK: - CoreDataStack Error
+// MARK: - CoreDataStack Errors
 
 extension CoreDataStack {
     enum Error: Swift.Error, LocalizedError {
