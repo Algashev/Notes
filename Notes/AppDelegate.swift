@@ -13,7 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let coreDataStack = try! CoreDataStack(modelName: "Notes") { error in
+            print("Core Data Stack is ready")
+        }
+        print(coreDataStack.context)
+        
         return true
     }
 
