@@ -18,21 +18,27 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initializeCoreDataStack()
+        self.initializeCoreDataStack() {
+            print("Core Data Stack is ready")
+        } onFailure: { error in
+            print(error.localizedDescription)
+        }
     }
 
-    private func initializeCoreDataStack() {
+    private func initializeCoreDataStack(
+        onSuccess: @escaping () -> (),
+        onFailure: @escaping (_ error: Error) -> ()) {
         do {
             self.coreDataStack = try CoreDataStack(modelName: "Notes") { error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    onFailure(error)
                     return
                 }
                 
-                print("Core Data Stack is ready")
+                onSuccess()
             }
         } catch {
-            print(error.localizedDescription)
+            onFailure(error)
         }
     }
 

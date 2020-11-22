@@ -69,20 +69,20 @@ extension CoreDataStack {
         public var errorDescription: String? {
             switch self {
             case let .dataModelSearchFailure(forModelName: name):
-                let key = "Data model search failure"
-                let comment = "Failed to find data model: \(name)"
+                let key = "Failed to find data model: \(name)"
+                let comment = "Data model search failure"
                 return NSLocalizedString(key, comment: comment)
             case let .dataModelCreationFailure(atPath: path):
-                let key = "Data model creation failure"
-                let comment = "Failed to create model from file: \(path)"
+                let key = "Failed to create model from file: \(path)"
+                let comment = "Data model creation failure"
                 return NSLocalizedString(key, comment: comment)
             case .documentDirectorySearchFailure:
-                let key = "Document directory search failure"
-                let comment = "Unable to resolve document directory"
+                let key = "Unable to resolve document directory"
+                let comment = "Document directory search failure"
                 return NSLocalizedString(key, comment: comment)
             case let .storeMigrationFailure(error: error):
-                let key = "Store migration failure"
-                let comment = "Error migrating store: \(error)"
+                let key = "Error migrating store: \(error)"
+                let comment = "Store migration failure"
                 return NSLocalizedString(key, comment: comment)
             }
         }
