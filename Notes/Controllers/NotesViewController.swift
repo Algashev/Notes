@@ -20,7 +20,7 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         
         self.initializeCoreDataStack() { [unowned self] in
-            self.createAndSaveNote()
+            // self.createAndSaveNote()
         } onFailure: { error in
             print(error.localizedDescription)
         }
@@ -66,5 +66,18 @@ class NotesViewController: UIViewController {
         
     }
 
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        if identifier == "\(AddNoteViewController.self)" {
+            guard let destination = segue.destination as? AddNoteViewController else {
+                return
+            }
+            
+            destination.managedObjectContext = self.coreDataStack.context
+        }
+    }
 }
 

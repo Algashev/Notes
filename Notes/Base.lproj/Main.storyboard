@@ -22,7 +22,7 @@
                     <navigationItem key="navigationItem" id="09j-vB-kqC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YFJ-am-T7c">
                             <connections>
-                                <segue destination="lC5-pu-pS0" kind="show" id="wdr-g4-th8"/>
+                                <segue destination="lC5-pu-pS0" kind="show" identifier="AddNoteViewController" id="wdr-g4-th8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -31,21 +31,54 @@
             </objects>
             <point key="canvasLocation" x="812" y="48"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Note View Controller-->
         <scene sceneID="r02-qK-nYT">
             <objects>
-                <viewController id="lC5-pu-pS0" sceneMemberID="viewController">
+                <viewController id="lC5-pu-pS0" customClass="AddNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qOC-mK-F4X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h30-rl-X5v">
+                                <rect key="frame" x="20" y="108" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RYl-77-JEY">
+                                <rect key="frame" x="20" y="150" width="374" height="726"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="QlK-s9-28c"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="h30-rl-X5v" firstAttribute="leading" secondItem="QlK-s9-28c" secondAttribute="leading" constant="20" id="Cgy-S2-Kfx"/>
+                            <constraint firstItem="QlK-s9-28c" firstAttribute="trailing" secondItem="h30-rl-X5v" secondAttribute="trailing" constant="20" id="KuN-jS-qzM"/>
+                            <constraint firstAttribute="bottom" secondItem="RYl-77-JEY" secondAttribute="bottom" constant="20" id="OcC-DW-fWv"/>
+                            <constraint firstItem="h30-rl-X5v" firstAttribute="top" secondItem="QlK-s9-28c" secondAttribute="top" constant="20" id="cGJ-gY-ZtN"/>
+                            <constraint firstItem="RYl-77-JEY" firstAttribute="leading" secondItem="QlK-s9-28c" secondAttribute="leading" constant="20" id="ct2-fb-d4A"/>
+                            <constraint firstItem="QlK-s9-28c" firstAttribute="trailing" secondItem="RYl-77-JEY" secondAttribute="trailing" constant="20" id="e8u-z2-AKf"/>
+                            <constraint firstItem="RYl-77-JEY" firstAttribute="top" secondItem="h30-rl-X5v" secondAttribute="bottom" constant="8" symbolic="YES" id="nUU-zM-hyB"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="iBe-7C-fcU"/>
+                    <navigationItem key="navigationItem" id="iBe-7C-fcU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4TK-FQ-QWG">
+                            <connections>
+                                <action selector="save:" destination="lC5-pu-pS0" id="SxG-47-J8H"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentsTextView" destination="RYl-77-JEY" id="ZSZ-vu-Ga7"/>
+                        <outlet property="titleTextField" destination="h30-rl-X5v" id="D9g-3M-c22"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2sg-VT-Ovu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="48"/>
+            <point key="canvasLocation" x="1595.6521739130435" y="47.544642857142854"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HFu-bw-tWw">
@@ -67,6 +100,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

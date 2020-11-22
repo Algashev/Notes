@@ -16,6 +16,7 @@
 		FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF9325697D8600316FE3 /* Notes.xcdatamodeld */; };
 		FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */; };
 		FF842CD8256A6A4D00997912 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CD7256A6A4D00997912 /* AddNoteViewController.swift */; };
+		FF842CDD256A720100997912 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CDC256A720100997912 /* UIAlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FF59BF9425697D8600316FE3 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		FF842CD7256A6A4D00997912 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		FF842CDC256A720100997912 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,7 @@
 				4E91ED93255EA9C500EF0ECA /* AppDelegate.swift */,
 				FF842CDA256A6A5C00997912 /* Controllers */,
 				FF59BF902569597000316FE3 /* CoreDataStack.swift */,
-				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
+				FF842CDF256A724D00997912 /* Extensions */,
 				4E91ED99255EA9C500EF0ECA /* Main.storyboard */,
 				4E91ED9C255EA9CD00EF0ECA /* Assets.xcassets */,
 				4E91ED9E255EA9CD00EF0ECA /* LaunchScreen.storyboard */,
@@ -82,6 +84,15 @@
 				4E91ED97255EA9C500EF0ECA /* NotesViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FF842CDF256A724D00997912 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
+				FF842CDC256A720100997912 /* UIAlertController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +168,7 @@
 				FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */,
 				4E91ED98255EA9C500EF0ECA /* NotesViewController.swift in Sources */,
 				FF842CD8256A6A4D00997912 /* AddNoteViewController.swift in Sources */,
+				FF842CDD256A720100997912 /* UIAlertController.swift in Sources */,
 				FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */,
 				4E91ED94255EA9C500EF0ECA /* AppDelegate.swift in Sources */,
 				FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */,
