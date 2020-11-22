@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -18,8 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initializeCoreDataStack() {
-            print("Core Data Stack is ready")
+        self.initializeCoreDataStack() { [unowned self] in
+            self.createAndSaveNote()
         } onFailure: { error in
             print(error.localizedDescription)
         }
@@ -39,6 +40,29 @@ class ViewController: UIViewController {
             }
         } catch {
             onFailure(error)
+        }
+    }
+    
+    private func createAndSaveNote() {
+        if let entityDescription = NSEntityDescription.entity(forEntityName: "Note", in: self.coreDataStack.context) {
+            
+            let note = NSManagedObject(entity: entityDescription, insertInto: self.coreDataStack.context)
+            
+            note.setValue("My First Note", forKey: "title")
+            note.setValue(Date(), forKey: "createdAt")
+            note.setValue(Date(), forKey: "updatedAt")
+            
+            print(note)
+            
+            do {
+                try self.coreDataStack.context.save()
+                let storeDirectoryURL = self.coreDataStack.storeDirectoryURL
+                let storePath = storeDirectoryURL?.absoluteString ?? ""
+                print("Store path: \(storePath)")
+            } catch {
+                print("Unable to Save Managed Object Context")
+                print("\(error), \(error.localizedDescription)")
+            }
         }
     }
 

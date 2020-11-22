@@ -18,6 +18,9 @@ final class CoreDataStack {
     
     private let modelName: String
     let context: NSManagedObjectContext
+    var storeDirectoryURL: URL? {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
+    }
     
     // MARK: - Initialization
     
@@ -36,7 +39,7 @@ final class CoreDataStack {
         self.context.persistentStoreCoordinator = coordinator
         
         DispatchQueue.global(qos: .background).async {
-            guard let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
+            guard let documentURL = self.storeDirectoryURL else {
                 DispatchQueue.main.sync {
                     completion(Error.documentDirectorySearchFailure)
                 }
@@ -66,7 +69,7 @@ extension CoreDataStack {
         case documentDirectorySearchFailure
         case storeMigrationFailure(error: String)
         
-        public var errorDescription: String? {
+        var errorDescription: String? {
             switch self {
             case let .dataModelSearchFailure(forModelName: name):
                 let key = "Failed to find data model: \(name)"
