@@ -10,6 +10,7 @@
 //  - Setting Up a Core Data Stack Manually: https://developer.apple.com/documentation/coredata/setting_up_a_core_data_stack/setting_up_a_core_data_stack_manually
 //  - Initializing the Core Data Stack: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/CoreData/InitializingtheCoreDataStack.html#//apple_ref/doc/uid/TP40001075-CH4-SW1
 
+import UIKit
 import CoreData
 
 final class CoreDataStack {
@@ -48,6 +49,7 @@ final class CoreDataStack {
             let storeURL = documentURL.appendingPathComponent("\(modelName).sqlite")
             do {
                 try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+                self.setupNotificationHandling()
                 DispatchQueue.main.sync {
                     completion(nil)
                 }
@@ -56,6 +58,30 @@ final class CoreDataStack {
                     completion(Error.storeMigrationFailure(error: error.localizedDescription))
                 }
             }
+        }
+    }
+    
+    private func setupNotificationHandling() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: UIApplication.willTerminateNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    @objc func saveChanges(_ notification: Notification) {
+        self.saveChanges()
+    }
+    
+    private func saveChanges() {
+        guard self.context.hasChanges else { return }
+        
+        do {
+            try self.context.save()
+            let storeDirectoryURL = self.storeDirectoryURL
+            let storePath = storeDirectoryURL?.absoluteString ?? ""
+            print("Store path: \(storePath)")
+        } catch {
+            print("Unable to Save Managed Object Context")
+            print("\(error), \(error.localizedDescription)")
         }
     }
 }

@@ -20,7 +20,7 @@ class NotesViewController: UIViewController {
         super.viewDidLoad()
         
         self.initializeCoreDataStack() { [unowned self] in
-            // self.createAndSaveNote()
+            
         } onFailure: { error in
             print(error.localizedDescription)
         }
@@ -41,29 +41,6 @@ class NotesViewController: UIViewController {
         } catch {
             onFailure(error)
         }
-    }
-    
-    private func createAndSaveNote() {
-        if let note = Note(insertInto: self.coreDataStack.context) {
-            note.title = "My Second Note"
-            note.createdAt = Date()
-            note.updatedAt = Date()
-            
-            print(note)
-            
-            do {
-                try self.coreDataStack.context.save()
-                let storeDirectoryURL = self.coreDataStack.storeDirectoryURL
-                let storePath = storeDirectoryURL?.absoluteString ?? ""
-                print("Store path: \(storePath)")
-            } catch {
-                print("Unable to Save Managed Object Context")
-                print("\(error), \(error.localizedDescription)")
-            }
-        } else {
-            print("Failed create Note")
-        }
-        
     }
 
     // MARK: - Navigation
