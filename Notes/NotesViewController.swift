@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NotesViewController.swift
 //  Notes
 //
 //  Created by Лайм HD on 13.11.2020.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class NotesViewController: UIViewController {
     
     // MARK: - Properties
     
