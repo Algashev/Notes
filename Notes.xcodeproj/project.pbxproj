@@ -14,6 +14,7 @@
 		4E91EDA0255EA9CD00EF0ECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E91ED9E255EA9CD00EF0ECA /* LaunchScreen.storyboard */; };
 		FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF902569597000316FE3 /* CoreDataStack.swift */; };
 		FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF9325697D8600316FE3 /* Notes.xcdatamodeld */; };
+		FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		4E91EDA1255EA9CD00EF0ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF59BF902569597000316FE3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FF59BF9425697D8600316FE3 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
+		FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				4E91ED93255EA9C500EF0ECA /* AppDelegate.swift */,
 				4E91ED97255EA9C500EF0ECA /* ViewController.swift */,
 				FF59BF902569597000316FE3 /* CoreDataStack.swift */,
+				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
 				4E91ED99255EA9C500EF0ECA /* Main.storyboard */,
 				4E91ED9C255EA9CD00EF0ECA /* Assets.xcassets */,
 				4E91ED9E255EA9CD00EF0ECA /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			files = (
 				FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */,
 				4E91ED98255EA9C500EF0ECA /* ViewController.swift in Sources */,
+				FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */,
 				4E91ED94255EA9C500EF0ECA /* AppDelegate.swift in Sources */,
 				FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */,
 			);

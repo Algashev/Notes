@@ -44,13 +44,10 @@ class ViewController: UIViewController {
     }
     
     private func createAndSaveNote() {
-        if let entityDescription = NSEntityDescription.entity(forEntityName: "Note", in: self.coreDataStack.context) {
-            
-            let note = NSManagedObject(entity: entityDescription, insertInto: self.coreDataStack.context)
-            
-            note.setValue("My First Note", forKey: "title")
-            note.setValue(Date(), forKey: "createdAt")
-            note.setValue(Date(), forKey: "updatedAt")
+        if let note = Note(insertInto: self.coreDataStack.context) {
+            note.title = "My Second Note"
+            note.createdAt = Date()
+            note.updatedAt = Date()
             
             print(note)
             
@@ -63,7 +60,10 @@ class ViewController: UIViewController {
                 print("Unable to Save Managed Object Context")
                 print("\(error), \(error.localizedDescription)")
             }
+        } else {
+            print("Failed create Note")
         }
+        
     }
 
 }
