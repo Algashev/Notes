@@ -33,12 +33,8 @@ class AddNoteViewController: UIViewController {
             return
         }
         
-        if let note = Note(insertInto: context) {
-            note.title = title
+        if let note = Note(title: title, in: context) {
             note.contents = self.contentsTextView.text
-            note.createdAt = Date()
-            note.updatedAt = Date()
-            
             print(note)
         } else {
             print("Failed create Note")
