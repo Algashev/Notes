@@ -14,6 +14,7 @@
 		4E91EDA0255EA9CD00EF0ECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E91ED9E255EA9CD00EF0ECA /* LaunchScreen.storyboard */; };
 		FF23B470256C7C840023CB84 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF23B46F256C7C840023CB84 /* ActivityIndicatorView.swift */; };
 		FF23B473256C7C9D0023CB84 /* ActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF23B472256C7C9D0023CB84 /* ActivityIndicatorView.xib */; };
+		FF23B479256ED1B20023CB84 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF23B478256ED1B20023CB84 /* Date.swift */; };
 		FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF902569597000316FE3 /* CoreDataStack.swift */; };
 		FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF9325697D8600316FE3 /* Notes.xcdatamodeld */; };
 		FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */; };
@@ -34,6 +35,7 @@
 		4E91EDA1255EA9CD00EF0ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF23B46F256C7C840023CB84 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		FF23B472256C7C9D0023CB84 /* ActivityIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityIndicatorView.xib; sourceTree = "<group>"; };
+		FF23B478256ED1B20023CB84 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FF59BF902569597000316FE3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FF59BF9425697D8600316FE3 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		FF842CDF256A724D00997912 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FF23B478256ED1B20023CB84 /* Date.swift */,
 				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
 				FF842CDC256A720100997912 /* UIAlertController.swift */,
 				FF59BFA0256C1A2F00316FE3 /* UIView.swift */,
@@ -196,6 +199,7 @@
 				FFF94622256AB9D3001EBC7D /* Note.swift in Sources */,
 				FF842CDD256A720100997912 /* UIAlertController.swift in Sources */,
 				FF23B470256C7C840023CB84 /* ActivityIndicatorView.swift in Sources */,
+				FF23B479256ED1B20023CB84 /* Date.swift in Sources */,
 				FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */,
 				FF59BF9E256C109300316FE3 /* NoteCell.swift in Sources */,
 				4E91ED94255EA9C500EF0ECA /* AppDelegate.swift in Sources */,

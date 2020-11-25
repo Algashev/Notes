@@ -10,19 +10,31 @@ import CoreData
 
 class NotesViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     // MARK: - Properties
     
     private var coreDataStack: CoreDataStack!
+    private var notes = [Note]() {
+        didSet { self.updateView() }
+    }
+    private var hasNotes: Bool {
+        self.notes.count > 0
+    }
     
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Notes"
+        //self.setupView()
         let activityIndicator = ActivityIndicatorView()
         activityIndicator.insertInto(self.navigationController?.view)
         self.initializeCoreDataStack() { [unowned self] in
             activityIndicator.removeFromSuperview()
+            self.fetchNotes()
         } onFailure: { error in
             print(error.localizedDescription)
         }
@@ -43,6 +55,28 @@ class NotesViewController: UIViewController {
         } catch {
             onFailure(error)
         }
+    }
+    
+    private func fetchNotes() {
+        let request = Note.classRequest
+        request.sortDescriptors = [Note.SortBy.updateAt(ascending: false)]
+        
+        self.coreDataStack.context.performAndWait {
+            do {
+                let notes = try self.coreDataStack.context.fetch(request)
+                self.notes = notes
+                self.tableView.reloadData()
+            } catch let error as NSError {
+                print("Unable to Execute Fetch Request")
+                print("\(error), \(error.localizedDescription)")
+                
+            }
+        }
+    }
+    
+    private func updateView() {
+        self.tableView.isHidden = !self.hasNotes
+        self.messageLabel.isHidden = self.hasNotes
     }
 
     // MARK: - Navigation
@@ -66,11 +100,20 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        self.notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(NoteCell.self)", for: indexPath) as? NoteCell else {
+            return UITableViewCell()
+        }
+        
+        let note = notes[indexPath.row]
+        cell.titleLabel.text = note.title
+        cell.updatedAtLabel.text = note.updatedAt?.string()
+        cell.contentsLabel.text = note.contents ?? " "
+        
+        return cell
     }
     
     
