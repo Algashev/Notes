@@ -19,8 +19,10 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let activityIndicator = ActivityIndicatorView()
+        activityIndicator.insertInto(self.navigationController?.view)
         self.initializeCoreDataStack() { [unowned self] in
-            
+            activityIndicator.removeFromSuperview()
         } onFailure: { error in
             print(error.localizedDescription)
         }

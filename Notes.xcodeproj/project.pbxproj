@@ -12,10 +12,13 @@
 		4E91ED9B255EA9C500EF0ECA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E91ED99255EA9C500EF0ECA /* Main.storyboard */; };
 		4E91ED9D255EA9CD00EF0ECA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E91ED9C255EA9CD00EF0ECA /* Assets.xcassets */; };
 		4E91EDA0255EA9CD00EF0ECA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E91ED9E255EA9CD00EF0ECA /* LaunchScreen.storyboard */; };
+		FF23B470256C7C840023CB84 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF23B46F256C7C840023CB84 /* ActivityIndicatorView.swift */; };
+		FF23B473256C7C9D0023CB84 /* ActivityIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF23B472256C7C9D0023CB84 /* ActivityIndicatorView.xib */; };
 		FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF902569597000316FE3 /* CoreDataStack.swift */; };
 		FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF9325697D8600316FE3 /* Notes.xcdatamodeld */; };
 		FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */; };
 		FF59BF9E256C109300316FE3 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BF9D256C109300316FE3 /* NoteCell.swift */; };
+		FF59BFA1256C1A2F00316FE3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF59BFA0256C1A2F00316FE3 /* UIView.swift */; };
 		FF842CD8256A6A4D00997912 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CD7256A6A4D00997912 /* AddNoteViewController.swift */; };
 		FF842CDD256A720100997912 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CDC256A720100997912 /* UIAlertController.swift */; };
 		FFF94622256AB9D3001EBC7D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF94621256AB9D3001EBC7D /* Note.swift */; };
@@ -29,10 +32,13 @@
 		4E91ED9C255EA9CD00EF0ECA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E91ED9F255EA9CD00EF0ECA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E91EDA1255EA9CD00EF0ECA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF23B46F256C7C840023CB84 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		FF23B472256C7C9D0023CB84 /* ActivityIndicatorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityIndicatorView.xib; sourceTree = "<group>"; };
 		FF59BF902569597000316FE3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FF59BF9425697D8600316FE3 /* Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notes.xcdatamodel; sourceTree = "<group>"; };
 		FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		FF59BF9D256C109300316FE3 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		FF59BFA0256C1A2F00316FE3 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FF842CD7256A6A4D00997912 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		FF842CDC256A720100997912 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		FFF94621256AB9D3001EBC7D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 				FF842CDA256A6A5C00997912 /* Controllers */,
 				FF59BF902569597000316FE3 /* CoreDataStack.swift */,
 				FF59BF9D256C109300316FE3 /* NoteCell.swift */,
+				FF23B475256C7CAD0023CB84 /* ActivityIndicatorView */,
 				FF842CDF256A724D00997912 /* Extensions */,
 				4E91ED99255EA9C500EF0ECA /* Main.storyboard */,
 				FFF94621256AB9D3001EBC7D /* Note.swift */,
@@ -81,6 +88,15 @@
 				4E91EDA1255EA9CD00EF0ECA /* Info.plist */,
 			);
 			path = Notes;
+			sourceTree = "<group>";
+		};
+		FF23B475256C7CAD0023CB84 /* ActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				FF23B46F256C7C840023CB84 /* ActivityIndicatorView.swift */,
+				FF23B472256C7C9D0023CB84 /* ActivityIndicatorView.xib */,
+			);
+			path = ActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		FF842CDA256A6A5C00997912 /* Controllers */ = {
@@ -97,6 +113,7 @@
 			children = (
 				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
 				FF842CDC256A720100997912 /* UIAlertController.swift */,
+				FF59BFA0256C1A2F00316FE3 /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -161,6 +178,7 @@
 				4E91EDA0255EA9CD00EF0ECA /* LaunchScreen.storyboard in Resources */,
 				4E91ED9D255EA9CD00EF0ECA /* Assets.xcassets in Resources */,
 				4E91ED9B255EA9C500EF0ECA /* Main.storyboard in Resources */,
+				FF23B473256C7C9D0023CB84 /* ActivityIndicatorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,11 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF59BFA1256C1A2F00316FE3 /* UIView.swift in Sources */,
 				FF59BF912569597000316FE3 /* CoreDataStack.swift in Sources */,
 				4E91ED98255EA9C500EF0ECA /* NotesViewController.swift in Sources */,
 				FF842CD8256A6A4D00997912 /* AddNoteViewController.swift in Sources */,
 				FFF94622256AB9D3001EBC7D /* Note.swift in Sources */,
 				FF842CDD256A720100997912 /* UIAlertController.swift in Sources */,
+				FF23B470256C7C840023CB84 /* ActivityIndicatorView.swift in Sources */,
 				FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */,
 				FF59BF9E256C109300316FE3 /* NoteCell.swift in Sources */,
 				4E91ED94255EA9C500EF0ECA /* AppDelegate.swift in Sources */,
