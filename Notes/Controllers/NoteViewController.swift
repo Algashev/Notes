@@ -1,5 +1,5 @@
 //
-//  AddNoteViewController.swift
+//  NoteViewController.swift
 //  Notes
 //
 //  Created by Александр Алгашев on 22.11.2020.
@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class AddNoteViewController: UIViewController {
+class NoteViewController: UIViewController {
     
     // MARK: - Properties
     

@@ -116,7 +116,7 @@
                     <navigationItem key="navigationItem" id="09j-vB-kqC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YFJ-am-T7c">
                             <connections>
-                                <segue destination="lC5-pu-pS0" kind="show" identifier="AddNoteViewController" id="wdr-g4-th8"/>
+                                <segue destination="lC5-pu-pS0" kind="show" identifier="NoteViewController" id="wdr-g4-th8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="811.59420289855075" y="47.544642857142854"/>
         </scene>
-        <!--Add Note View Controller-->
+        <!--Note View Controller-->
         <scene sceneID="r02-qK-nYT">
             <objects>
-                <viewController id="lC5-pu-pS0" customClass="AddNoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lC5-pu-pS0" customClass="NoteViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qOC-mK-F4X">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

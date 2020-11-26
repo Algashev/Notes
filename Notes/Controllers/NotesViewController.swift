@@ -84,8 +84,8 @@ class NotesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
-        if identifier == "\(AddNoteViewController.self)" {
-            guard let destination = segue.destination as? AddNoteViewController else {
+        if identifier == "\(NoteViewController.self)" {
+            guard let destination = segue.destination as? NoteViewController else {
                 return
             }
             
