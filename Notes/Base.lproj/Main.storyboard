@@ -82,6 +82,7 @@
                                                     <outlet property="contentsLabel" destination="d2W-oH-QnO" id="htX-N5-4XA"/>
                                                     <outlet property="titleLabel" destination="AYP-2e-GW3" id="tln-Ik-y6j"/>
                                                     <outlet property="updatedAtLabel" destination="kia-SH-cUv" id="r0o-2n-dDB"/>
+                                                    <segue destination="lC5-pu-pS0" kind="show" identifier="editNote" id="dXy-kz-PRI"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -116,7 +117,7 @@
                     <navigationItem key="navigationItem" id="09j-vB-kqC">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YFJ-am-T7c">
                             <connections>
-                                <segue destination="lC5-pu-pS0" kind="show" identifier="NoteViewController" id="wdr-g4-th8"/>
+                                <segue destination="lC5-pu-pS0" kind="show" identifier="addNote" id="wdr-g4-th8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -197,6 +198,9 @@
             <point key="canvasLocation" x="18.840579710144929" y="47.544642857142854"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="dXy-kz-PRI"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

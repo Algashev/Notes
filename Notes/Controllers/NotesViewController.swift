@@ -78,19 +78,42 @@ class NotesViewController: UIViewController {
         self.tableView.isHidden = !self.hasNotes
         self.messageLabel.isHidden = self.hasNotes
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let index = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: index, animated: true)
+        }
+    }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
-        if identifier == "\(NoteViewController.self)" {
-            guard let destination = segue.destination as? NoteViewController else {
-                return
-            }
-            
-            destination.managedObjectContext = self.coreDataStack.context
+        switch identifier {
+        case NoteViewController.Mode.addNote.rawValue:
+            guard let destination = segue.destination as? NoteViewController
+            else { return }
+            destination.mode = .addNote
+            destination.context = self.coreDataStack.context
+        case NoteViewController.Mode.editNote.rawValue:
+            guard let destination = segue.destination as? NoteViewController
+            else { return }
+            guard let indexPath = tableView.indexPathForSelectedRow
+            else { return }
+            destination.mode = .editNote
+            destination.note = self.notes[indexPath.row]
+        default: break
         }
+//        if identifier == "\(NoteViewController.self)" {
+//            guard let destination = segue.destination as? NoteViewController else {
+//                return
+//            }
+//
+//            destination.context = self.coreDataStack.context
+//        }
     }
     
     
