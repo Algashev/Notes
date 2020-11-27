@@ -13,6 +13,10 @@
 import UIKit
 import CoreData
 
+protocol CoreDataStackDelegate: AnyObject {
+    func context(_ context: NSManagedObjectContext, objectsObjectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?)
+}
+
 final class CoreDataStack {
     
     // MARK: - Properties
@@ -22,6 +26,8 @@ final class CoreDataStack {
     var storeDirectoryURL: URL? {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last
     }
+    
+    weak var delegate: CoreDataStackDelegate?
     
     // MARK: - Initialization
     
@@ -65,6 +71,7 @@ final class CoreDataStack {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: UIApplication.willTerminateNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(saveChanges(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(contextDidChange(_:)), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: self.context)
     }
     
     @objc func saveChanges(_ notification: Notification) {
@@ -84,6 +91,18 @@ final class CoreDataStack {
             print("\(error), \(error.localizedDescription)")
         }
     }
+    
+    @objc func contextDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>
+        let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>
+        let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>
+            
+        self.delegate?.context(self.context, objectsObjectsDidChange: inserts, updates: updates, deletes: deletes)
+    }
+    
+    
 }
 
 // MARK: - CoreDataStack Errors

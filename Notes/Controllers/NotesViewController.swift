@@ -17,7 +17,7 @@ class NotesViewController: UIViewController {
     
     private var coreDataStack: CoreDataStack!
     private var notes = [Note]() {
-        didSet { self.updateView() }
+        didSet { self.verifyViewWithDataExistance() }
     }
     private var hasNotes: Bool {
         self.notes.count > 0
@@ -38,6 +38,7 @@ class NotesViewController: UIViewController {
         } onFailure: { error in
             print(error.localizedDescription)
         }
+        self.coreDataStack.delegate = self
     }
 
     private func initializeCoreDataStack(
@@ -74,7 +75,7 @@ class NotesViewController: UIViewController {
         }
     }
     
-    private func updateView() {
+    private func verifyViewWithDataExistance() {
         self.tableView.isHidden = !self.hasNotes
         self.messageLabel.isHidden = self.hasNotes
     }
@@ -145,5 +146,49 @@ extension NotesViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension NotesViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - CoreDataStackDelegate
+
+extension NotesViewController: CoreDataStackDelegate {
+    func context(_ context: NSManagedObjectContext, objectsObjectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?) {
+        var notesDidChange = false
+        
+        inserts?.forEach { insert in
+            if let note = insert as? Note {
+                self.notes.append(note)
+                notesDidChange = true
+            }
+        }
+        
+        let updatedNote = updates?.first { update in
+            let note = update as? Note
+            return note != nil
+        }
+        if updatedNote != nil {
+            notesDidChange = true
+        }
+        
+        deletes?.forEach { delete in
+            if let note = delete as? Note {
+                if let index = self.notes.firstIndex(of: note) {
+                    self.notes.remove(at: index)
+                    notesDidChange = true
+                }
+            }
+        }
+
+        if notesDidChange {
+            self.synchronizeViewWithContext()
+        }
+    }
+    
+    private func synchronizeViewWithContext() {
+        self.notes.sort { $0.updatedAt ?? Date() > $1.updatedAt ?? Date() }
+        self.tableView.reloadData()
+        self.verifyViewWithDataExistance()
+    }
+    
     
 }
