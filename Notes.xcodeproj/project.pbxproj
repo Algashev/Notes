@@ -23,6 +23,7 @@
 		FF842CD8256A6A4D00997912 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CD7256A6A4D00997912 /* NoteViewController.swift */; };
 		FF842CDD256A720100997912 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF842CDC256A720100997912 /* UIAlertController.swift */; };
 		FFF94622256AB9D3001EBC7D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF94621256AB9D3001EBC7D /* Note.swift */; };
+		FFF9462625718654001EBC7D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF9462525718654001EBC7D /* Array.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		FF842CD7256A6A4D00997912 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		FF842CDC256A720100997912 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		FFF94621256AB9D3001EBC7D /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		FFF9462525718654001EBC7D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		FF842CDF256A724D00997912 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FFF9462525718654001EBC7D /* Array.swift */,
 				FF23B478256ED1B20023CB84 /* Date.swift */,
 				FF59BF98256A54DE00316FE3 /* NSManagedObject.swift */,
 				FF842CDC256A720100997912 /* UIAlertController.swift */,
@@ -201,6 +204,7 @@
 				FF23B470256C7C840023CB84 /* ActivityIndicatorView.swift in Sources */,
 				FF23B479256ED1B20023CB84 /* Date.swift in Sources */,
 				FF59BF99256A54DE00316FE3 /* NSManagedObject.swift in Sources */,
+				FFF9462625718654001EBC7D /* Array.swift in Sources */,
 				FF59BF9E256C109300316FE3 /* NoteCell.swift in Sources */,
 				4E91ED94255EA9C500EF0ECA /* AppDelegate.swift in Sources */,
 				FF59BF9525697D8600316FE3 /* Notes.xcdatamodeld in Sources */,

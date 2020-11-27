@@ -172,8 +172,7 @@ extension NotesViewController: CoreDataStackDelegate {
         
         deletes?.forEach { delete in
             if let note = delete as? Note {
-                if let index = self.notes.firstIndex(of: note) {
-                    self.notes.remove(at: index)
+                if self.notes.remove(note) != nil {
                     notesDidChange = true
                 }
             }
