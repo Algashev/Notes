@@ -14,7 +14,7 @@ import UIKit
 import CoreData
 
 protocol CoreDataStackDelegate: AnyObject {
-    func context(_ context: NSManagedObjectContext, objectsObjectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?)
+    func context(_ context: NSManagedObjectContext, objectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?)
 }
 
 final class CoreDataStack {
@@ -99,7 +99,7 @@ final class CoreDataStack {
         let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>
         let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>
             
-        self.delegate?.context(self.context, objectsObjectsDidChange: inserts, updates: updates, deletes: deletes)
+        self.delegate?.context(self.context, objectsDidChange: inserts, updates: updates, deletes: deletes)
     }
     
     

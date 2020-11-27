@@ -152,7 +152,7 @@ extension NotesViewController: UITableViewDelegate {
 // MARK: - CoreDataStackDelegate
 
 extension NotesViewController: CoreDataStackDelegate {
-    func context(_ context: NSManagedObjectContext, objectsObjectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?) {
+    func context(_ context: NSManagedObjectContext, objectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?) {
         var notesDidChange = false
         
         inserts?.forEach { insert in
