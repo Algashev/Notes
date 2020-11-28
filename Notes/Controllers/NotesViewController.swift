@@ -110,13 +110,8 @@ class NotesViewController: UIViewController {
             destination.note = self.notes[indexPath.row]
         default: break
         }
-//        if identifier == "\(NoteViewController.self)" {
-//            guard let destination = segue.destination as? NoteViewController else {
-//                return
-//            }
-//
-//            destination.context = self.coreDataStack.context
-//        }
+
+        
     }
     
     
