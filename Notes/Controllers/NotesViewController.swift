@@ -33,7 +33,7 @@ class NotesViewController: UIViewController {
         //self.setupView()
         let activityIndicator = ActivityIndicatorView()
         activityIndicator.insertInto(self.navigationController?.view)
-        self.coreDataStack = CoreDataStack(modelName: "Notes") { [unowned self] error in
+        self.coreDataStack = CoreDataStack(modelName: "Notes", delegate: self) { [unowned self] error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -43,7 +43,6 @@ class NotesViewController: UIViewController {
             self.fetchNotes()
             activityIndicator.removeFromSuperview()
         }
-        self.coreDataStack.delegate = self
         
         
     }

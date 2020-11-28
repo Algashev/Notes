@@ -31,9 +31,10 @@ final class CoreDataStack {
     
     // MARK: - Initialization
     
-    init(modelName: String, completion: @escaping (_ error: Swift.Error?) -> ()) {
+    init(modelName: String, delegate: CoreDataStackDelegate? = nil, completion: @escaping (_ error: Swift.Error?) -> ()) {
         self.modelName = modelName
         self.context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        self.delegate = delegate
         
         guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
             completion(Error.dataModelSearchFailure(forModelName: modelName))
