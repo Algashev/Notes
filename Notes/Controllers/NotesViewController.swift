@@ -16,6 +16,7 @@ class NotesViewController: UIViewController {
     // MARK: - Properties
     
     private var coreDataStack: CoreDataStack!
+    private var fetchedResultsController: NSFetchedResultsController<Note>!
     private var notes = [Note]() {
         didSet { self.verifyViewWithDataExistance() }
     }
@@ -33,8 +34,9 @@ class NotesViewController: UIViewController {
         let activityIndicator = ActivityIndicatorView()
         activityIndicator.insertInto(self.navigationController?.view)
         self.initializeCoreDataStack() { [unowned self] in
-            activityIndicator.removeFromSuperview()
+            self.initializeFetchedResultsController()
             self.fetchNotes()
+            activityIndicator.removeFromSuperview()
         } onFailure: { error in
             print(error.localizedDescription)
         }
@@ -56,6 +58,18 @@ class NotesViewController: UIViewController {
         } catch {
             onFailure(error)
         }
+    }
+    
+    private func initializeFetchedResultsController() {
+        let request = Note.classRequest
+        request.sortDescriptors = [Note.SortBy.updateAt(ascending: false)]
+        
+        self.fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: self.coreDataStack.context,
+            sectionNameKeyPath: nil,
+            cacheName: nil)
+        self.fetchedResultsController.delegate = self
     }
     
     private func fetchNotes() {
@@ -196,5 +210,11 @@ extension NotesViewController: CoreDataStackDelegate {
         self.verifyViewWithDataExistance()
     }
     
+    
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+
+extension NotesViewController: NSFetchedResultsControllerDelegate {
     
 }
