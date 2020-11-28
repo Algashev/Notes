@@ -140,6 +140,13 @@ extension NotesViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        let note = self.notes[indexPath.row]
+        self.coreDataStack.context.delete(note)
+    }
+    
     
 }
 
