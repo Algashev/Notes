@@ -33,31 +33,19 @@ class NotesViewController: UIViewController {
         //self.setupView()
         let activityIndicator = ActivityIndicatorView()
         activityIndicator.insertInto(self.navigationController?.view)
-        self.initializeCoreDataStack() { [unowned self] in
+        self.coreDataStack = CoreDataStack(modelName: "Notes") { [unowned self] error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
             self.initializeFetchedResultsController()
             self.fetchNotes()
             activityIndicator.removeFromSuperview()
-        } onFailure: { error in
-            print(error.localizedDescription)
         }
         self.coreDataStack.delegate = self
-    }
-
-    private func initializeCoreDataStack(
-        onSuccess: @escaping () -> (),
-        onFailure: @escaping (_ error: Error) -> ()) {
-        do {
-            self.coreDataStack = try CoreDataStack(modelName: "Notes") { error in
-                if let error = error {
-                    onFailure(error)
-                    return
-                }
-                
-                onSuccess()
-            }
-        } catch {
-            onFailure(error)
-        }
+        
+        
     }
     
     private func initializeFetchedResultsController() {

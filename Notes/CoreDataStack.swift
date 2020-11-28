@@ -31,16 +31,18 @@ final class CoreDataStack {
     
     // MARK: - Initialization
     
-    init(modelName: String, completion: @escaping (_ error: Swift.Error?) -> ()) throws {
-        guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
-            throw Error.dataModelSearchFailure(forModelName: modelName)
-        }
-        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
-            throw Error.dataModelCreationFailure(atPath: modelURL.absoluteString)
-        }
-        
+    init(modelName: String, completion: @escaping (_ error: Swift.Error?) -> ()) {
         self.modelName = modelName
         self.context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        
+        guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "momd") else {
+            completion(Error.dataModelSearchFailure(forModelName: modelName))
+            return
+        }
+        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
+            completion(Error.dataModelCreationFailure(atPath: modelURL.absoluteString))
+            return
+        }
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         self.context.persistentStoreCoordinator = coordinator
