@@ -27,5 +27,11 @@ class NoteCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configure(with note: Note) {
+        self.titleLabel.text = note.title
+        self.updatedAtLabel.text = note.updatedAt?.string()
+        self.contentsLabel.text = note.contents ?? " "
+    }
 
 }

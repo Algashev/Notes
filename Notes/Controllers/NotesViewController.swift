@@ -117,16 +117,18 @@ extension NotesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(NoteCell.self)", for: indexPath) as? NoteCell else {
+        guard let cell = tableView.dequeueReusableCell(NoteCell.self, for: indexPath) else {
             return UITableViewCell()
         }
         
-        let note = self.fetchedResultsController.object(at: indexPath)
-        cell.titleLabel.text = note.title
-        cell.updatedAtLabel.text = note.updatedAt?.string()
-        cell.contentsLabel.text = note.contents ?? " "
+        self.configure(cell, at: indexPath)
         
         return cell
+    }
+    
+    private func configure(_ cell: NoteCell, at indexPath: IndexPath) {
+        let note = self.fetchedResultsController.object(at: indexPath)
+        cell.configure(with: note)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -191,5 +193,46 @@ extension NotesViewController: UITableViewDelegate {
 // MARK: - NSFetchedResultsControllerDelegate
 
 extension NotesViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.beginUpdates()
+        
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        func insertRow(_ indexPath: IndexPath?) {
+            if let indexPath = indexPath {
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        }
+        func deleteRow(_ indexPath: IndexPath?) {
+            if let indexPath = indexPath {
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        
+        switch type {
+        case .insert:
+            insertRow(newIndexPath)
+        case .delete:
+            deleteRow(indexPath)
+        case .move:
+            insertRow(newIndexPath)
+            deleteRow(indexPath)
+        case .update:
+            if let indexPath = indexPath,
+               let cell = self.tableView.cellForRow(at: indexPath) as? NoteCell {
+                self.configure(cell, at: indexPath)
+            }
+        @unknown default:
+            print("\(Self.self).\(#function) Неизвестный NSFetchedResultsChangeType")
+        }
+        
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.endUpdates()
+        
+    }
+    
     
 }
