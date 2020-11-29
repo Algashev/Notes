@@ -17,11 +17,8 @@ class NotesViewController: UIViewController {
     
     private var coreDataStack: CoreDataStack!
     private var fetchedResultsController: NSFetchedResultsController<Note>!
-    private var notes = [Note]() {
-        didSet { self.verifyViewWithDataExistance() }
-    }
     private var hasNotes: Bool {
-        self.notes.count > 0
+        self.fetchedResultsController.fetchedObjects?.count ?? 0 > 0
     }
     
     // MARK: - View Life Cycle
@@ -33,7 +30,7 @@ class NotesViewController: UIViewController {
         //self.setupView()
         let activityIndicator = ActivityIndicatorView()
         activityIndicator.insertInto(self.navigationController?.view)
-        self.coreDataStack = CoreDataStack(modelName: "Notes", delegate: self) { [unowned self] error in
+        self.coreDataStack = CoreDataStack(modelName: "Notes") { [unowned self] error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -41,6 +38,7 @@ class NotesViewController: UIViewController {
             
             self.initializeFetchedResultsController()
             self.fetchNotes()
+            self.verifyViewWithDataExistance()
             activityIndicator.removeFromSuperview()
         }
         
@@ -60,25 +58,20 @@ class NotesViewController: UIViewController {
     }
     
     private func fetchNotes() {
-        let request = Note.classRequest
-        request.sortDescriptors = [Note.SortBy.updateAt(ascending: false)]
-        
-        self.coreDataStack.context.performAndWait {
-            do {
-                let notes = try self.coreDataStack.context.fetch(request)
-                self.notes = notes
-                self.tableView.reloadData()
-            } catch let error as NSError {
-                print("Unable to Execute Fetch Request")
-                print("\(error), \(error.localizedDescription)")
-                
-            }
+        do {
+            try self.fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Unable to Execute Fetch Request")
+            print("\(error), \(error.localizedDescription)")
         }
     }
     
     private func verifyViewWithDataExistance() {
         self.tableView.isHidden = !self.hasNotes
         self.messageLabel.isHidden = self.hasNotes
+        if self.hasNotes {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -106,7 +99,7 @@ class NotesViewController: UIViewController {
             guard let indexPath = tableView.indexPathForSelectedRow
             else { return }
             destination.mode = .editNote
-            destination.note = self.notes[indexPath.row]
+            destination.note = self.fetchedResultsController.object(at: indexPath)
         default: break
         }
 
@@ -120,7 +113,7 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.notes.count
+        self.fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -128,7 +121,7 @@ extension NotesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let note = notes[indexPath.row]
+        let note = self.fetchedResultsController.object(at: indexPath)
         cell.titleLabel.text = note.title
         cell.updatedAtLabel.text = note.updatedAt?.string()
         cell.contentsLabel.text = note.contents ?? " "
@@ -139,7 +132,7 @@ extension NotesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        let note = self.notes[indexPath.row]
+        let note = self.fetchedResultsController.object(at: indexPath)
         self.coreDataStack.context.delete(note)
     }
     
@@ -154,46 +147,46 @@ extension NotesViewController: UITableViewDelegate {
 
 // MARK: - CoreDataStackDelegate
 
-extension NotesViewController: CoreDataStackDelegate {
-    func context(_ context: NSManagedObjectContext, objectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?) {
-        var notesDidChange = false
-        
-        inserts?.forEach { insert in
-            if let note = insert as? Note {
-                self.notes.append(note)
-                notesDidChange = true
-            }
-        }
-        
-        let updatedNote = updates?.first { update in
-            let note = update as? Note
-            return note != nil
-        }
-        if updatedNote != nil {
-            notesDidChange = true
-        }
-        
-        deletes?.forEach { delete in
-            if let note = delete as? Note {
-                if self.notes.remove(note) != nil {
-                    notesDidChange = true
-                }
-            }
-        }
-
-        if notesDidChange {
-            self.synchronizeViewWithContext()
-        }
-    }
-    
-    private func synchronizeViewWithContext() {
-        self.notes.sort { $0.updatedAt ?? Date() > $1.updatedAt ?? Date() }
-        self.tableView.reloadData()
-        self.verifyViewWithDataExistance()
-    }
-    
-    
-}
+//extension NotesViewController: CoreDataStackDelegate {
+//    func context(_ context: NSManagedObjectContext, objectsDidChange inserts: Set<NSManagedObject>?, updates: Set<NSManagedObject>?, deletes: Set<NSManagedObject>?) {
+//        var notesDidChange = false
+//
+//        inserts?.forEach { insert in
+//            if let note = insert as? Note {
+//                self.notes.append(note)
+//                notesDidChange = true
+//            }
+//        }
+//
+//        let updatedNote = updates?.first { update in
+//            let note = update as? Note
+//            return note != nil
+//        }
+//        if updatedNote != nil {
+//            notesDidChange = true
+//        }
+//
+//        deletes?.forEach { delete in
+//            if let note = delete as? Note {
+//                if self.notes.remove(note) != nil {
+//                    notesDidChange = true
+//                }
+//            }
+//        }
+//
+//        if notesDidChange {
+//            self.synchronizeViewWithContext()
+//        }
+//    }
+//
+//    private func synchronizeViewWithContext() {
+//        self.notes.sort { $0.updatedAt ?? Date() > $1.updatedAt ?? Date() }
+//        self.tableView.reloadData()
+//        self.verifyViewWithDataExistance()
+//    }
+//
+//
+//}
 
 // MARK: - NSFetchedResultsControllerDelegate
 
