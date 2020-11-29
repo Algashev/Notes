@@ -29,6 +29,7 @@ class NoteViewController: UIViewController {
     var mode = Mode.addNote
     var context: NSManagedObjectContext?
     var note: Note?
+    var completion: (() -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,12 @@ class NoteViewController: UIViewController {
         self.contentsTextView.text = self.note?.contents
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.completion?()
+    }
+    
     @IBAction func save(_ sender: UIBarButtonItem) {
         guard let title = titleTextField.text, !title.isEmpty else {
             let alert = UIAlertController(title: "Title Missing", message: "Your note doesn't have a title.")
@@ -54,19 +61,23 @@ class NoteViewController: UIViewController {
             return
         }
         
-        switch mode {
-        case .addNote:
-            guard let context = self.context else { return }
-            if let note = Note(title: title, in: context) {
-                note.contents = self.contentsTextView.text
-                print(note)
-            } else {
-                print("Failed create Note")
+        self.completion = {
+            let contents = self.contentsTextView.text
+            
+            switch self.mode {
+            case .addNote:
+                guard let context = self.context else { return }
+                if let note = Note(title: title, in: context) {
+                    note.contents = contents
+                    print(note)
+                } else {
+                    print("Failed create Note")
+                }
+            case .editNote:
+                self.note?.title = title
+                self.note?.updatedAt = Date()
+                self.note?.contents = contents
             }
-        case .editNote:
-            self.note?.title = self.titleTextField.text
-            self.note?.updatedAt = Date()
-            self.note?.contents = self.contentsTextView.text
         }
         
         
